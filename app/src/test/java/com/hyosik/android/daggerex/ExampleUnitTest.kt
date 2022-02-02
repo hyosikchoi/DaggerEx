@@ -24,10 +24,24 @@ class ExampleUnitTest {
         var str = myClass.str
         assertNotNull("조회 결과 null" , str)
 
+//        val myComponent = DaggerMyComponent.create()
+//        myComponent.inject(myClass = myClass)
+//        str = myClass.str
+//        assertEquals("Hello World" , str)
+    }
+
+    @Test
+    fun `member injector`() {
+        val myClass = MyClass()
+        var str = myClass.str
+        println("result = ${str}")
+
         val myComponent = DaggerMyComponent.create()
-        myComponent.inject(myClass = myClass)
+        var injector = myComponent.getInjector()
+        injector.injectMembers(myClass)
         str = myClass.str
-        assertEquals("Hello World" , str)
+
+        println("result = ${str}")
     }
 
 }
