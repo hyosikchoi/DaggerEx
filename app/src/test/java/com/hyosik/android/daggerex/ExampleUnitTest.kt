@@ -1,7 +1,9 @@
 package com.hyosik.android.daggerex
 
+import com.hyosik.android.daggerex.component.DaggerCounterComponent
 import com.hyosik.android.daggerex.component.DaggerMyComponent
 import com.hyosik.android.daggerex.component.DaggerPersonComponent
+import com.hyosik.android.daggerex.data.entity.Counter
 import com.hyosik.android.daggerex.data.entity.MyClass
 import com.hyosik.android.daggerex.data.entity.PersonB
 import org.junit.Test
@@ -59,6 +61,24 @@ class ExampleUnitTest {
         personComponent.inject(personB = personB)
         assertEquals("HyoSik" , personB.name)
         assertEquals(100 , personB.age)
+    }
+
+    // p.54
+    @Test
+    fun `Lazy 주입`() {
+        val component = DaggerCounterComponent.create()
+        val counter = Counter()
+        component.inject(counter = counter)
+        counter.printLazy()
+    }
+
+    // p.55
+    @Test
+    fun `Provider 주입`() {
+        val component = DaggerCounterComponent.create()
+        val counter = Counter()
+        component.inject(counter = counter)
+        counter.printProvider()
     }
 
 }

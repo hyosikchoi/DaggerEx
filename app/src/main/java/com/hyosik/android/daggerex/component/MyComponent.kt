@@ -16,4 +16,18 @@ interface MyComponent {
 
     fun getInjector() : MembersInjector<MyClass>
 
+    // Component Builder 작성
+    // build 메서드와 나머지 setter 메서드로 구현한다.
+    @Component.Builder
+    interface Builder {
+        fun setMyModule(myModule: MyModule) : Builder //setter 는 반드시 하나의 매개변수만 가져야한다. 반환타입은 void , builder 또는 builder super 타입
+        fun build() : MyComponent
+    }
+
+    // Component.Factory
+    interface Factory {
+        fun newMyComponent(
+            myModule: MyModule
+        ) : MyComponent
+    }
 }
