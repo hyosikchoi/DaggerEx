@@ -1,6 +1,7 @@
 package com.hyosik.android.daggerex.module
 
 import androidx.annotation.Nullable
+import com.hyosik.android.daggerex.data.qualifier.GoodBye
 import dagger.Module
 import dagger.Provides
 import javax.inject.Named
@@ -22,4 +23,12 @@ class MyModule {
     fun provideKorea() : String {
         return "Korea Republic"
     }
+
+    @Provides
+    @Nullable
+    @GoodBye
+    fun provideGoodBye() : String {
+        return "GoodBye"
+    }
+
 }

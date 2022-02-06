@@ -81,7 +81,7 @@ class ExampleUnitTest {
         counter.printProvider()
     }
 
-    // p.59
+    // p.58
     @Test
     fun `Named 한정자 사용`() {
         val component = DaggerMyComponent.create()
@@ -89,6 +89,15 @@ class ExampleUnitTest {
         component.inject(myClass = myClass)
         println(myClass.korea)
         println(myClass.str)
+    }
+
+    // p.59
+    @Test
+    fun `Qualifier 한정자 사용`() {
+        val component = DaggerMyComponent.create()
+        val myClass = MyClass()
+        component.inject(myClass = myClass)
+        println(myClass.goodBye)
     }
 
 }
