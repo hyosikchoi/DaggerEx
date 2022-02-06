@@ -1,14 +1,16 @@
 package com.hyosik.android.daggerex
 
+import com.hyosik.android.daggerex.component.DaggerBindsComponent
 import com.hyosik.android.daggerex.component.DaggerCounterComponent
 import com.hyosik.android.daggerex.component.DaggerMyComponent
 import com.hyosik.android.daggerex.component.DaggerPersonComponent
 import com.hyosik.android.daggerex.data.entity.Counter
+import com.hyosik.android.daggerex.data.entity.Foo
 import com.hyosik.android.daggerex.data.entity.MyClass
 import com.hyosik.android.daggerex.data.entity.PersonB
 import org.junit.Test
+import com.google.common.truth.Truth.assertThat
 
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -27,7 +29,7 @@ class ExampleUnitTest {
     fun `test member injection`() {
         val myClass = MyClass()
         var str = myClass.str
-        assertNotNull("조회 결과 null" , str)
+        assertThat(str).isNotNull()
 
 //        val myComponent = DaggerMyComponent.create()
 //        myComponent.inject(myClass = myClass)
@@ -59,8 +61,8 @@ class ExampleUnitTest {
 
         var personB = PersonB()
         personComponent.inject(personB = personB)
-        assertEquals("HyoSik" , personB.name)
-        assertEquals(100 , personB.age)
+        assertThat(personB.name).isEqualTo("HyoSik")
+        assertThat(personB.age).isEqualTo(100)
     }
 
     // p.54
@@ -98,6 +100,20 @@ class ExampleUnitTest {
         val myClass = MyClass()
         component.inject(myClass = myClass)
         println(myClass.goodBye)
+    }
+
+    // p.66
+    @Test
+    fun `BindsInstance 사용`() {
+        var hello = "Hello World"
+
+        val component = DaggerBindsComponent.builder()
+            .setStr(hello)
+            .build()
+
+        val foo = Foo()
+        component.inject(foo = foo)
+        assertThat(foo.str).isEqualTo(hello)
     }
 
 }
