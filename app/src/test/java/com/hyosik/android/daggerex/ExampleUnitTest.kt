@@ -1,15 +1,12 @@
 package com.hyosik.android.daggerex
 
-import com.hyosik.android.daggerex.component.DaggerBindsComponent
-import com.hyosik.android.daggerex.component.DaggerCounterComponent
-import com.hyosik.android.daggerex.component.DaggerMyComponent
-import com.hyosik.android.daggerex.component.DaggerPersonComponent
 import com.hyosik.android.daggerex.data.entity.Counter
 import com.hyosik.android.daggerex.data.entity.Foo
 import com.hyosik.android.daggerex.data.entity.MyClass
 import com.hyosik.android.daggerex.data.entity.PersonB
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
+import com.hyosik.android.daggerex.component.*
 
 
 /**
@@ -114,6 +111,27 @@ class ExampleUnitTest {
         val foo = Foo()
         component.inject(foo = foo)
         assertThat(foo.str).isEqualTo(hello)
+
+    }
+
+    // p.75
+    @Test
+    fun `MultiBinding with SubComponent 사용`() {
+        val parentComp = DaggerParentComponent.create()
+        val childComp = parentComp.childCompBuilder().build()
+
+        println("List set in Parent")
+
+        parentComp.strings().forEach {
+            println(it)
+        }
+
+        println("List set in Child")
+
+        childComp.strings().forEach {
+            println(it)
+        }
+
     }
 
 }
