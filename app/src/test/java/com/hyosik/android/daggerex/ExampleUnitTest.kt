@@ -1,12 +1,9 @@
 package com.hyosik.android.daggerex
 
-import com.hyosik.android.daggerex.data.entity.Counter
-import com.hyosik.android.daggerex.data.entity.Foo
-import com.hyosik.android.daggerex.data.entity.MyClass
-import com.hyosik.android.daggerex.data.entity.PersonB
 import org.junit.Test
 import com.google.common.truth.Truth.assertThat
 import com.hyosik.android.daggerex.component.*
+import com.hyosik.android.daggerex.data.entity.*
 
 
 /**
@@ -131,6 +128,30 @@ class ExampleUnitTest {
         childComp.strings().forEach {
             println(it)
         }
+
+    }
+
+    // p.82
+    @Test
+    fun `SubComponent 를 활용한 카페 에서 주문`() {
+        val cafe = Cafe()
+        println(cafe.orderCoffee())
+        println(cafe.orderCoffee())
+        println(cafe.orderCoffee())
+    }
+
+    // p.85
+    @Test
+    fun `dependency 를 이용한 Component 간 상속`() {
+        val poo = Poo()
+        val componentA = DaggerComponentA.create()
+        val componentB = DaggerComponentB.builder()
+            .componentA(componentA)
+            .build()
+
+        componentB.inject(poo = poo)
+        println(poo.str)
+        println(poo.num)
 
     }
 
