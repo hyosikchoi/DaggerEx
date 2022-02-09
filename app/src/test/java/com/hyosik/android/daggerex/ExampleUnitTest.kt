@@ -155,4 +155,10 @@ class ExampleUnitTest {
 
     }
 
+    @Test
+    fun `내가 SubComponent 를 따라 만든 Restaurant`() {
+        val restaurant = Restaurant()
+        println(restaurant.orderPastaSet())
+    }
+
 }
