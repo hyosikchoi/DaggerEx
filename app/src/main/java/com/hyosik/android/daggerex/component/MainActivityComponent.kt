@@ -5,26 +5,14 @@ import com.hyosik.android.daggerex.data.qualifier.ActivityScope
 import com.hyosik.android.daggerex.module.MainActivityModule
 import dagger.BindsInstance
 import dagger.Subcomponent
+import dagger.android.AndroidInjector
 
 
 @Subcomponent(modules = [MainActivityModule::class])
 @ActivityScope
-interface MainActivityComponent {
+interface MainActivityComponent : AndroidInjector<MainActivity> {
 
-    fun mainFragmentComponentBuilder() : MainFragmentComponent.Builder
-
-    fun inject(mainActivity: MainActivity)
-
-    @Subcomponent.Builder
-    interface Builder {
-
-        fun setModule(mainModule : MainActivityModule) : Builder
-
-        @BindsInstance
-        fun setActivity(mainActivity: MainActivity) : Builder
-
-        fun build() : MainActivityComponent
-
-    }
+    @Subcomponent.Factory
+    interface Factory : AndroidInjector.Factory<MainActivity> {}
 
 }

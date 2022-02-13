@@ -3,27 +3,15 @@ package com.hyosik.android.daggerex.component
 import com.hyosik.android.daggerex.MainFragment
 import com.hyosik.android.daggerex.data.qualifier.FragmentScope
 import com.hyosik.android.daggerex.module.MainFragmentModule
-import dagger.BindsInstance
-import dagger.Component
 import dagger.Subcomponent
+import dagger.android.AndroidInjector
 
 
 @Subcomponent(modules = [MainFragmentModule::class])
 @FragmentScope
-interface MainFragmentComponent {
+interface MainFragmentComponent : AndroidInjector<MainFragment> {
 
-    fun inject(mainFragment: MainFragment)
-
-    @Subcomponent.Builder
-    interface Builder {
-
-        fun setFragmentModule(mainFragmentModule: MainFragmentModule) : Builder
-
-        @BindsInstance
-        fun setFragment(mainFragment: MainFragment) : Builder
-
-        fun build() : MainFragmentComponent
-
-    }
+    @Subcomponent.Factory
+    interface Factory : AndroidInjector.Factory<MainFragment> {}
 
 }
