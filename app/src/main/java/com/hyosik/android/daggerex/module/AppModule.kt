@@ -5,16 +5,18 @@ import android.content.SharedPreferences
 import com.hyosik.android.daggerex.App
 import com.hyosik.android.daggerex.MainActivity
 import com.hyosik.android.daggerex.component.MainActivityComponent
+import com.hyosik.android.daggerex.data.qualifier.ActivityScope
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.android.AndroidInjector
+import dagger.android.ContributesAndroidInjector
 import dagger.multibindings.ClassKey
 import dagger.multibindings.IntoMap
 import java.lang.reflect.Type
 import javax.inject.Singleton
 
-@Module(subcomponents = [MainActivityComponent::class])
+@Module
 abstract class AppModule {
 
     companion object {
@@ -28,9 +30,8 @@ abstract class AppModule {
         }
     }
 
-    @Binds
-    @IntoMap
-    @ClassKey(MainActivity::class)
-    abstract fun bindAndroidInjectorFactory(factory : MainActivityComponent.Factory) : AndroidInjector.Factory<*>
+    @ContributesAndroidInjector(modules = [MainActivityModule::class])
+    @ActivityScope
+    abstract fun mainActivity() : MainActivity
 
 }

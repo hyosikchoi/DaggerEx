@@ -15,10 +15,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MainActivity : BaseActivity<ActivityMainBinding>() , HasAndroidInjector {
-
-    @Inject
-    lateinit var androidInjector: DispatchingAndroidInjector<Any>
+class MainActivity : BaseActivity<ActivityMainBinding>(){
 
     @Inject
     lateinit var sharedPreferences : SharedPreferences
@@ -40,10 +37,4 @@ class MainActivity : BaseActivity<ActivityMainBinding>() , HasAndroidInjector {
             .replace(R.id.container, MainFragment())
             .commit()
     }
-
-    override fun androidInjector(): AndroidInjector<Any> {
-        return androidInjector
-    }
-
-
 }
